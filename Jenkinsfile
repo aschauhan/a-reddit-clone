@@ -50,6 +50,20 @@ pipeline {
                 sh "trivy fs . > trivyfs.txt"
              }
            }
+	stage("Build & Push Docker Image") {
+             steps {
+                script {
+	            sh "docker login -u anujs1984 --password-stdin < /home/my_password"
+                     docker.withRegistry('',DOCKER_PASS) {
+                         docker_image = docker.build "${IMAGE_NAME}"
+                     }
+                     docker.withRegistry('',DOCKER_PASS) {
+                         docker_image.push("${IMAGE_TAG}")
+                         docker_image.push('latest')
+                     }
+                 }
+             }
+         }
 
        }
     }
