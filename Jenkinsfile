@@ -54,8 +54,7 @@ pipeline {
             steps {
                 script {
                     // Use the correct method to read the password
-                    sh "echo '${DOCKER_PASS}' | docker login -u ${DOCKER_USER} --password-stdin"
-
+                    sh "docker login -u anujs1984 --password-stdin < /home/my_password"
                     def docker_image = docker.build("${IMAGE_NAME}")
                     docker_image.push("${IMAGE_TAG}")
                     docker_image.push('latest')
