@@ -79,7 +79,8 @@ pipeline {
         stage("Trigger CD Pipeline") {
             steps {
                 script {
-                    sh "curl -v -k --user anuj:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://ec2-44-204-236-144.compute-1.amazonaws.com:8080/job/New-Reddit-Clone-CD/buildWithParameters?token=gitops-token'"
+                    sh "curl -v -k --user anuj:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' '`ec2-44-204-236-144.compute-1.amazonaws.com:8080/job/New-Reddit-Clone-CD/buildWithParameters?token=gitops-token'"
+
                 }
             }
         }
